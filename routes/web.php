@@ -3,12 +3,16 @@
 use App\Http\Controllers\AddUser\AddUser;
 use App\Http\Controllers\AddUser\viewAddUser;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Author\addAuthorController;
 use App\Http\Controllers\Author\viewAddAuthor;
+use App\Http\Controllers\Author\viewAddAuthorController;
 use App\Http\Controllers\Books\AddBookController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Materials\AddMaterialController;
 use App\Http\Controllers\Materials\ViewMaterialController;
+use App\Http\Controllers\Subject\addSubjectController;
 use App\Http\Controllers\Subject\viewAddSubject;
+use App\Http\Controllers\Subject\viewAddSubjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -52,8 +56,10 @@ Route::middleware(['isTeacher'])->group(function () {
     Route::post('/store/book', [AddBookController::class, 'store'])->name("book.store");
     Route::get('/add/user', [viewAddUser::class, 'view'])->name("user.add");
     Route::post('/store/user', [AddUser::class, 'store'])->name("user.store");
-    Route::get('/add/author', [viewAddAuthor::class, 'view'])->name("author.add");
-    Route::get('/add/subject', [viewAddSubject::class, 'view'])->name("subject.add");
+    Route::get('/add/author', [viewAddAuthorController::class, 'view'])->name("author.add");
+    Route::post('/store/author', [addAuthorController::class, 'store'])->name("author.store");
+    Route::get('/add/subject', [viewAddSubjectController::class, 'view'])->name("subject.add");
+    Route::post('/store/subject', [addSubjectController::class, 'store'])->name("subject.store");
 });
 
 Route::middleware(['isAdmin'])->group(function () {
@@ -63,8 +69,10 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/store/book', [AddBookController::class, 'store'])->name("book.store");
     Route::get('/add/user', [viewAddUser::class, 'view'])->name("user.add");
     Route::post('/store/user', [AddUser::class, 'store'])->name("user.store");
-    Route::get('/add/author', [viewAddAuthor::class, 'view'])->name("author.add");
-    Route::get('/add/subject', [viewAddSubject::class, 'view'])->name("subject.add");
+    Route::get('/add/author', [viewAddAuthorController::class, 'view'])->name("author.add");
+    Route::post('/store/author', [addAuthorController::class, 'store'])->name("author.store");
+    Route::get('/add/subject', [viewAddSubjectController::class, 'view'])->name("subject.add");
+    Route::post('/store/subject', [addSubjectController::class, 'store'])->name("subject.store");
 });
 
 // php artisan cache:clear

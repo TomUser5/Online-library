@@ -61,6 +61,11 @@
       border-radius: 5px;
       background-color: #f9f9f9;
     }
+
+    .height {
+      max-height: 30vh;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 
@@ -135,13 +140,13 @@
           }
           @endphp
           @if(!Teacher::where('user_id', Auth::user()->id)->exists() && !Admin::where('user_id', Auth::user()->id)->exists())
-          <ul class="dropdown-menu dropdown-menu-dark w-100">
+          <ul class="dropdown-menu dropdown-menu-dark w-100 height overflow-y-auto">
             @foreach($classesStudent as $class)
             <li><a class="dropdown-item" href="{{ route('materials', ['class' => $class->class]) }}">{{$class->class}}</a></li>
             @endforeach
           </ul>
           @else
-          <ul class="dropdown-menu dropdown-menu-dark w-100">
+          <ul class="dropdown-menu dropdown-menu-dark w-100 height overflow-y-auto">
             @foreach($classes as $class)
             <li><a class="dropdown-item" href="{{ route('materials', ['class' => $class->class]) }}">{{$class->class}}</a></li>
             @endforeach

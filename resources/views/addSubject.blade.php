@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form class="form" method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
+<form class="form" method="POST" action="{{ route('subject.store') }}">
     @csrf
     <div class="d-flex flex-column">
         <div class="mb-3">
