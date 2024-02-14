@@ -11,7 +11,7 @@ class Subject extends Model
 
     protected $table = 'subjects';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'subject',
