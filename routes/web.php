@@ -80,4 +80,3 @@ Route::middleware(['isAdmin'])->group(function () {
 // php artisan route:cache
 // php artisan cache:clear
 // php artisan config:clear
-//
