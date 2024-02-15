@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AddUser;
 
 use App\Http\Controllers\Controller;
+use App\Imports\ImportUser;
 use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Teacher;
@@ -10,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AddUser extends Controller
 {
@@ -69,6 +71,22 @@ class AddUser extends Controller
                 'user_id' =>  $userId,
             ]);
         }
+
+        return redirect()->route("index");
+    }
+
+    public function importUsers()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
+        $password = '';
+
+        for ($i = 0; $i < 12; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        dd($password);
+
+        Excel::import(new ImportUser, 'images/test.xlsx');
 
         return redirect()->route("index");
     }

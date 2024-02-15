@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form class="form" method="POST" action="{{ route('subject.store') }}">
+<form class="form" method="POST" action="{{ route('user.import') }}">
     @csrf
     <div class="d-flex flex-column">
         <div class="mb-3">
