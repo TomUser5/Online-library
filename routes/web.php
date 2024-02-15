@@ -60,6 +60,7 @@ Route::middleware(['isTeacher'])->group(function () {
     Route::post('/store/author', [addAuthorController::class, 'store'])->name("author.store");
     Route::get('/add/subject', [viewAddSubjectController::class, 'view'])->name("subject.add");
     Route::post('/store/subject', [addSubjectController::class, 'store'])->name("subject.store");
+    Route::post('/import/users', [AddUser::class, 'importUsers'])->name("user.import");
 });
 
 Route::middleware(['isAdmin'])->group(function () {
@@ -73,6 +74,7 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/store/author', [addAuthorController::class, 'store'])->name("author.store");
     Route::get('/add/subject', [viewAddSubjectController::class, 'view'])->name("subject.add");
     Route::post('/store/subject', [addSubjectController::class, 'store'])->name("subject.store");
+    Route::post('/import/users', [AddUser::class, 'importUsers'])->name("user.import");
 });
 
 // php artisan cache:clear
