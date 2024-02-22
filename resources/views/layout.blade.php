@@ -188,11 +188,15 @@
             <li><a class="dropdown-item {{ Request::routeIs('subject.add') ? 'activePage' : '' }}" href="{{ route('subject.add') }}">Учебен предмет</a></li>
           </ul>
       </li>
-      <li>
-        <a href="{{ route('user.add') }}" class="nav-link {{ Request::routeIs('user.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0">
-          <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/add-administrator.png" />
+      <li class="nav-item dropdown">
+        <a href="#" class="nav-link {{ Request::routeIs('user.add') ? 'activePage' : '' }} {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/add-administrator.png" />
           Добави потребител
         </a>
+          <ul class="dropdown-menu dropdown-menu-dark w-100">
+            <li><a class="dropdown-item {{ Request::routeIs('user.add') ? 'activePage' : '' }}" href="{{ route('user.add') }}">Ръчно</a></li>
+            <li><a class="dropdown-item {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-wrap" href="{{ route('view.user.import') }}">Чрез excel файл (само за ученици)</a></li>
+          </ul>
       </li>
       @endif
     </ul>

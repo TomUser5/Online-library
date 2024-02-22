@@ -35,7 +35,7 @@
 
                             <div class="mt-4 pb-5">
 
-                                <h2 class="fw-bold mb-5">Влизане в профил</h2>
+                                <h2 class="fw-bold mb-5">Смяна на парола</h2>
 
                                 @if (Session::has('message'))
                                 <div class="alert alert-success" role="alert">
@@ -43,7 +43,7 @@
                                 </div>
                                 @endif
 
-                                <form class="form-floating bg-dark" method="POST" action="login/store">
+                                <form class="form-floating bg-dark" method="POST" action="{{ route('forget.password.post') }}">
                                     @csrf
 
                                     <div class="form-floating mb-3">
@@ -55,26 +55,10 @@
                                         <p style="color: red;">{{ $message }}</p>
                                     </strong>
                                     @enderror
-                                    <br>
-                                    @error('bothError')
-                                    <strong>
-                                        <p style="color: red;">{{ $message }}</p>
-                                    </strong>
-                                    @enderror
-                                    <div class="form-floating">
-                                        <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
-                                        <label for="floatingPassword">Парола</label>
-                                    </div>
-                                    @error('password')
-                                    <strong>
-                                        <p style="color: red;">{{ $message }}</p>
-                                    </strong>
-                                    @enderror
-                                    <br>
 
                                     <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> -->
 
-                                    <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Вход</button>
+                                    <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Изпращане на линк за промяна на паролата</button>
                                 </form>
 
                             </div>

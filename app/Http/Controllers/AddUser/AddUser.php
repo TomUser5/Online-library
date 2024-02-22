@@ -75,18 +75,22 @@ class AddUser extends Controller
         return redirect()->route("index");
     }
 
-    public function importUsers()
+    public function importUsers(Request $request)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
-        $password = '';
+        $request->validate(
+            [
+                'document' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx|max:8119',
+            ],
+            [
+                'document.required' => 'Файлът е задължителен!',
+                'document.mimes' => 'Моля, изберете excel файл!',
+                'document.max' => 'Файлът трябва да бъде под 8 MB',
+            ]
+        );
 
-        for ($i = 0; $i < 12; $i++) {
-            $password .= $characters[rand(0, strlen($characters) - 1)];
-        }
+        $file = $request->file('document');
 
-        dd($password);
-
-        Excel::import(new ImportUser, 'images/test.xlsx');
+        Excel::import(new ImportUser, $file);
 
         return redirect()->route("index");
     }

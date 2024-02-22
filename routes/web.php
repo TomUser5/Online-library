@@ -8,6 +8,7 @@ use App\Http\Controllers\Author\viewAddAuthor;
 use App\Http\Controllers\Author\viewAddAuthorController;
 use App\Http\Controllers\Books\AddBookController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Materials\AddMaterialController;
 use App\Http\Controllers\Materials\ViewMaterialController;
 use App\Http\Controllers\Subject\addSubjectController;
@@ -30,10 +31,14 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/store', [AuthController::class, 'storeUser'])->name('store');
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/login', [AuthController::class, 'login'])->name("login");
+    Route::get('/', [AuthController::class, 'login'])->name("login");
     Route::post('/login/store', [AuthController::class, 'loginStore']);;
     //Route::get('/login/admin', [AuthController::class, 'loginAdmin'])->name("loginAdmin");
     //Route::post('/login/admin/store', [AuthController::class, 'loginAdminStore']);
+    Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+    Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+    Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+    Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -44,9 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
     //Route::post('/logout', [AuthController::class, 'logoutF'])->name('logout');
     Route::post('/logout', function () {
         Auth::logout();
-        return redirect('login');
+        return redirect()->route('login');
     })->name('logout');
-    
 });
 
 Route::middleware(['isTeacher'])->group(function () {
@@ -60,6 +64,7 @@ Route::middleware(['isTeacher'])->group(function () {
     Route::post('/store/author', [addAuthorController::class, 'store'])->name("author.store");
     Route::get('/add/subject', [viewAddSubjectController::class, 'view'])->name("subject.add");
     Route::post('/store/subject', [addSubjectController::class, 'store'])->name("subject.store");
+    Route::get('/view/import/users', [viewAddUser::class, 'viewImportUser'])->name("view.user.import");
     Route::post('/import/users', [AddUser::class, 'importUsers'])->name("user.import");
 });
 
@@ -74,6 +79,7 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/store/author', [addAuthorController::class, 'store'])->name("author.store");
     Route::get('/add/subject', [viewAddSubjectController::class, 'view'])->name("subject.add");
     Route::post('/store/subject', [addSubjectController::class, 'store'])->name("subject.store");
+    Route::get('/view/import/users', [viewAddUser::class, 'viewImportUser'])->name("view.user.import");
     Route::post('/import/users', [AddUser::class, 'importUsers'])->name("user.import");
 });
 
