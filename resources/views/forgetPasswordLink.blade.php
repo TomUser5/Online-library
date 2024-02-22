@@ -35,46 +35,38 @@
 
                             <div class="mt-4 pb-5">
 
-                                <h2 class="fw-bold mb-5">Влизане в профил</h2>
+                                <h2 class="fw-bold mb-5">Смяна на парола</h2>
 
-                                @if (Session::has('message'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ Session::get('message') }}
-                                </div>
-                                @endif
-
-                                <form class="form-floating bg-dark" method="POST" action="login/store">
+                                <form class="form-floating bg-dark"  method="POST" action="{{ route('reset.password.post') }}">
                                     @csrf
 
                                     <div class="form-floating mb-3">
-                                        <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                        <input type="email" name="email"  class="form-control" id="floatingInput" placeholder="name@example.com">
                                         <label>Email</label>
                                     </div>
-                                    @error('email')
-                                    <strong>
-                                        <p style="color: red;">{{ $message }}</p>
-                                    </strong>
-                                    @enderror
-                                    <br>
-                                    @error('bothError')
-                                    <strong>
-                                        <p style="color: red;">{{ $message }}</p>
-                                    </strong>
-                                    @enderror
+                                    @if ($errors->has('email'))
+                                      <span class="text-danger">{{ $errors->first('email') }}</span>
+                                  @endif
+
                                     <div class="form-floating">
                                         <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                                         <label for="floatingPassword">Парола</label>
                                     </div>
-                                    @error('password')
-                                    <strong>
-                                        <p style="color: red;">{{ $message }}</p>
-                                    </strong>
-                                    @enderror
-                                    <br>
+                                    @if ($errors->has('password'))
+                                      <span class="text-danger">{{ $errors->first('password') }}</span>
+                                  @endif
+
+                                    <div class="form-floating">
+                                        <input type="password" name="password_confirmation" class="form-control" id="floatingPassword" placeholder="Password">
+                                        <label for="floatingPassword">Проверете паролата</label>
+                                    </div>
+                                    @if ($errors->has('password_confirmation'))
+                                      <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
+                                  @endif
 
                                     <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> -->
 
-                                    <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Вход</button>
+                                    <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Промяна на паролата</button>
                                 </form>
 
                             </div>

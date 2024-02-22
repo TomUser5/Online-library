@@ -2,14 +2,15 @@
 
 @section('content')
 
-<form class="form" method="POST" action="{{ route('subject.store') }}">
+<form class="form" method="POST" action="{{ route('user.import') }}" enctype="multipart/form-data">
     @csrf
     <div class="d-flex flex-column">
+
         <div class="mb-3">
-            <label class="form-label">Име на учебения предмет :</label><br>
-            <input type="text" class="form-control" name="subject" value="{{ old('subject') }}"><br>
+            <label class="form-label">Избери файл</label> &nbsp;
+            <input class="form-control" type="file" name="document" accept=".xlsx, .xlsm, .xlsb, .xltx, .xltm, .xls, .xlt, .xls, .xml, .xml, .xlam, .xla, .xlw, .xlr">
         </div>
-        @error('subject')
+        @error('document')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
@@ -18,7 +19,7 @@
             <button type="button" style="margin-right: 7%; margin-left: 5%;" class="btn btn-secondary" onclick="Clear()">Изчисти</button>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </div>
+</form>
 
-
-        @endsection
+@endsection

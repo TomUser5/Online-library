@@ -13,4 +13,9 @@ class viewAddUser extends Controller
         $classes = School_class::all();
         return view('addUser', compact('classes'));
     }
+
+    public function viewImportUser() 
+    {
+        return view('importUsers');
+    }
 }
