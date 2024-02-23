@@ -8,7 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
 
-    <title>Document</title>
+    <title>STEM.lib</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-online-library-online-learning-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png">
     <style>
         .gradient-custom {
             /* Chrome 10-25, Safari 5.1-6 */
@@ -44,25 +45,31 @@
                                         <input type="email" name="email"  class="form-control" id="floatingInput" placeholder="name@example.com">
                                         <label>Email</label>
                                     </div>
-                                    @if ($errors->has('email'))
-                                      <span class="text-danger">{{ $errors->first('email') }}</span>
-                                  @endif
+                                    @error('email')
+                                    <strong>
+                                        <p style="color: red;">{{ $message }}</p>
+                                    </strong>
+                                    @enderror
 
                                     <div class="form-floating">
                                         <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                                         <label for="floatingPassword">Парола</label>
                                     </div>
-                                    @if ($errors->has('password'))
-                                      <span class="text-danger">{{ $errors->first('password') }}</span>
-                                  @endif
+                                    @error('password')
+                                    <strong>
+                                        <p style="color: red;">{{ $message }}</p>
+                                    </strong>
+                                    @enderror
 
                                     <div class="form-floating">
                                         <input type="password" name="password_confirmation" class="form-control" id="floatingPassword" placeholder="Password">
-                                        <label for="floatingPassword">Проверете паролата</label>
+                                        <label for="floatingPassword">Повторете паролата</label>
                                     </div>
-                                    @if ($errors->has('password_confirmation'))
-                                      <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                                  @endif
+                                    @error('password_confirmation')
+                                    <strong>
+                                        <p style="color: red;">{{ $message }}</p>
+                                    </strong>
+                                    @enderror
 
                                     <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> -->
 

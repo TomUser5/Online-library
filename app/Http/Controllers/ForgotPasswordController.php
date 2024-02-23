@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Database\QueryException;
 
 class ForgotPasswordController extends Controller
 {
@@ -24,9 +25,16 @@ class ForgotPasswordController extends Controller
      */
     public function submitForgetPasswordForm(Request $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-        ]);
+            $request->validate([
+                'email' => 'required|email|exists:users,email|unique:users,email',
+            ], [
+                'email.required' => 'Моля въведете email!',
+                'email.email' => 'Моля въведете валиден email!',
+                'email.exists' => 'Този email адрес не съществува в системата.',
+                'email.unique' => 'Този email адрес вече е заявен за промяна/задаване на парола.(проверете си email-а)',
+            ]);
+        
+        
 
         $token = Str::random(64);
 
@@ -38,10 +46,10 @@ class ForgotPasswordController extends Controller
 
         Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
-            $message->subject('Reset Password');
+            $message->subject('Смяна на паролата');
         });
 
-        return back()->with('message', 'We have e-mailed your password reset link!');
+        return back()->with('message', 'Изпратихме Ви по email линк за смяна на паролата!');
     }
     /**
      * Write code on Method
@@ -61,10 +69,20 @@ class ForgotPasswordController extends Controller
     public function submitResetPasswordForm(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users,email|exists:password_reset_tokens,email',
-            'password' => 'required|string|min:6|confirmed',
+            'email' => 'required|email|exists:password_reset_tokens,email',
+            'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required'
+        ], [
+            'email.required' => 'Моля въведете email!',
+            'email.email' => 'Моля въведете валиден email!',
+            'email.exists' => 'Този email адрес не е заявен за промяна/задаване на парола.',
+            'password.required' => 'Моля въведете парола!',
+            'password.string' => 'Паролата трябва да бъде символен низ.',
+            'password.min' => 'Паролата трябва да бъде поне 8 символа дълга.',
+            'password.confirmed' => 'Потвърдената парола не съвпада с въведената парола.',
+            'password_confirmation.required' => 'Моля потвърдете паролата!',
         ]);
+        
 
         $updatePassword = DB::table('password_reset_tokens')
             ->where([
@@ -78,6 +96,6 @@ class ForgotPasswordController extends Controller
         DB::table('password_reset_tokens')->where('email', $request->email)->delete();
 
         // Redirect to the login page or any other appropriate page
-        return redirect()->route('login')->with('message', 'Your password has been changed!');
+        return redirect()->route('login')->with('message', 'Успешно променихте паролата!');
     }
 }

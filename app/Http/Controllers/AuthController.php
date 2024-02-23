@@ -31,11 +31,7 @@ class AuthController extends Controller
 
     //     return redirect()->route("index");
     // }
-    public function loginAdmin()
-    {
-        return view('loginAdmin');
-    }
-
+    
     public function login()
     {
         return view('login');

@@ -8,10 +8,15 @@ use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Teacher;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
 
 class AddUser extends Controller
 {
@@ -27,7 +32,6 @@ class AddUser extends Controller
             'last_name' =>  'required',
             'user_role' => 'required',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:8',
         ], [
             'first_name' =>  'Моля въведете име!',
             'middle_name' =>  'Моля въведете име!',
@@ -36,9 +40,6 @@ class AddUser extends Controller
             'email.required' => 'Моля въведете email!',
             'email.email' => 'Моля въведете валиден email!',
             'email.unique' => 'Този email вече е регистриран!',
-            'password.required' => 'Моля въведете парола!',
-            'password.confirmed' => 'Паролите не съвпадат!',
-            'password.min' => 'Паролата трябва да е най-малко 8 знака!',
         ]);
         
         $user = User::create([
@@ -46,8 +47,10 @@ class AddUser extends Controller
             'middle_name' =>  $request['middle_name'],
             'last_name' =>  $request['last_name'],
             'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'password' => Hash::make($this->generateRandomPassword()),
         ]);
+
+        $this->createPasswordResetTokenAndSendEmail($request['email']);
 
         if($selectedRole =='flexRadioStudent')
         {
@@ -87,11 +90,45 @@ class AddUser extends Controller
                 'document.max' => 'Файлът трябва да бъде под 8 MB',
             ]
         );
-
+    
         $file = $request->file('document');
 
-        Excel::import(new ImportUser, $file);
+    try {
+        $result = Excel::import(new ImportUser, $file);
+    } catch (ValidationException $e) {
+        return redirect()->route('view.user.import')->with('message', 'В файла има невалиден/и имейл/и!');
+    }
 
-        return redirect()->route("index");
+    // If import was successful, redirect to index
+    return redirect()->route('index');
+    }
+    
+    protected function createPasswordResetTokenAndSendEmail($email)
+    {
+
+        $token = Str::random(64);
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+
+        Mail::send('email.setPassword', ['token' => $token], function ($message) use ($email) {
+            $message->to($email);
+            $message->subject('Задаване на паролата');
+        });
+    }
+
+    private function generateRandomPassword($length = 12)
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+';
+        $password = '';
+
+        for ($i = 0; $i < $length; $i++) {
+            $password .= $characters[rand(0, strlen($characters) - 1)];
+        }
+
+        return $password;
     }
 }
