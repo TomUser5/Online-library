@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM.lib</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-online-library-online-learning-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
 
-    <title>Document</title>
     <style>
         .gradient-custom {
             /* Chrome 10-25, Safari 5.1-6 */
@@ -33,7 +34,7 @@
                     <div class="card bg-dark text-white" style="border-radius: 1rem;">
                         <div class="card-body p-5 text-center">
 
-                            <div class="mt-4 pb-5">
+                            <div class="mt-4">
 
                                 <h2 class="fw-bold mb-5">Влизане в профил</h2>
 
@@ -75,6 +76,9 @@
                                     <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p> -->
 
                                     <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Вход</button>
+                                    <div class="form-floating pt-4">
+                                        <p>Ако профилът Ви е създаден днес и не сте си отваряли email-а за да зададете парола на профила - проверете си email-а, а в случай на забравена парола от <a href="{{ route('forget.password.get') }}">тук</a> можете да я смените.</p>
+                                    </div>
                                 </form>
 
                             </div>

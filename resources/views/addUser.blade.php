@@ -43,22 +43,6 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <div class="mb-3">
-            <label class="form-label">Парола :</label><br>
-            <input type="text" class="form-control" name="password" value="{{ old('password') }}"><br>
-        </div>
-        @error('password')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        <div class="mb-3">
-            <label class="form-label">Повтори паролата :</label><br>
-            <input type="text" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}"><br>
-        </div>
-        @error('password_confirmation')
-        <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
         <div class="form-check">
             <input class="form-check-input" type="radio" name="user_role" value="flexRadioStudent" id="flexRadioStudent">
             <label class="form-check-label" for="flexRadioStudent">
@@ -114,10 +98,8 @@
 
         <script>
             $(document).ready(function() {
-                // Initial check on page load
                 updateContentVisibility();
 
-                // Handle radio button change event
                 $('input[name="user_role"]').change(function() {
                     updateContentVisibility();
                 });
@@ -125,10 +107,8 @@
                 function updateContentVisibility() {
                     var selectedRole = $('input[name="user_role"]:checked').val();
 
-                    // Hide all content sections
                     $('.role-content').hide();
 
-                    // Show content based on the selected role
                     if (selectedRole === 'flexRadioStudent') {
                         $('.student-content').show();
                     } else if (selectedRole === 'flexRadioTeacher') {

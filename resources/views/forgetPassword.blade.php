@@ -8,7 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="...">
 
-    <title>Document</title>
+    <title>STEM.lib</title>
+    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/external-online-library-online-learning-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png">
     <style>
         .gradient-custom {
             /* Chrome 10-25, Safari 5.1-6 */

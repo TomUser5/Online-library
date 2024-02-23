@@ -15,7 +15,6 @@
 
         <div style="width:100%;">
             <button type="submit" class="btn btnColor">Добави</button>
-            <button type="button" style="margin-right: 7%; margin-left: 5%;" class="btn btn-secondary" onclick="Clear()">Изчисти</button>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

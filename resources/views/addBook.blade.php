@@ -97,34 +97,6 @@
             sessionStorage.removeItem(selectNames[i]);
         }
     }
-
-    // window.onbeforeunload = function(event) {
-    //     for (var i = 0; i < inputNames.length; i++) {
-    //         sessionStorage.inputNames[i] = document.getElementsByName(inputNames[i])[0].value;
-    //     }
-    //     for (var i = 0; i < selectNames.length; i++) {
-    //         sessionStorage.selectNames[i] = document.getElementsByName(selectNames[i])[0].selectedIndex;
-    //     }
-    // };
-
-
-    window.addEventListener('DOMContentLoaded', (event) => {
-        for (var i = 0; i < inputNames.length; i++) {
-            var storedValue = sessionStorage.getItem(inputNames[i]);
-
-            if (storedValue !== null) {
-                document.getElementsByName(inputNames[i])[0].value = storedValue;
-            }
-        }
-
-        for (var i = 0; i < selectNames.length; i++) {
-            var storedValue = sessionStorage.getItem(selectNames[i]);
-
-            if (storedValue !== null) {
-                document.getElementsByName(selectNames[i])[0].selectedIndex = storedValue;
-            }
-        }
-    });
 </script>
 
 @endsection
