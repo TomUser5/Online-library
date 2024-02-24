@@ -96,7 +96,7 @@ class AddUser extends Controller
     try {
         $result = Excel::import(new ImportUser, $file);
     } catch (ValidationException $e) {
-        return redirect()->route('view.user.import')->with('message', 'В файла има невалиден/и имейл/и!');
+        return redirect()->route('view.user.import')->with('message', 'В файла има грешка, проверете дали всички имена присъстват, дали имейлите са валидни и дали някои от тях вече нямат създадени профили!');
     }
 
     // If import was successful, redirect to index

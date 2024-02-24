@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PasswordResetToken;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,7 +16,18 @@ class ForgotPasswordController extends Controller
 {
     public function showForgetPasswordForm()
     {
+        $this->deleteTokensOlderThanADay();
+
         return view('forgetPassword');
+    }
+
+    private function deleteTokensOlderThanADay()
+    {
+        // Calculate the date and time from one day ago
+        $oneDayAgo = Carbon::now()->subDay();
+
+        // Delete tokens where created_at is older than a day
+        PasswordResetToken::where('created_at', '<', $oneDayAgo)->delete();
     }
 
     /**
@@ -25,16 +37,16 @@ class ForgotPasswordController extends Controller
      */
     public function submitForgetPasswordForm(Request $request)
     {
-            $request->validate([
-                'email' => 'required|email|exists:users,email|unique:users,email',
-            ], [
-                'email.required' => 'Моля въведете email!',
-                'email.email' => 'Моля въведете валиден email!',
-                'email.exists' => 'Този email адрес не съществува в системата.',
-                'email.unique' => 'Този email адрес вече е заявен за промяна/задаване на парола.(проверете си email-а)',
-            ]);
-        
-        
+        $request->validate([
+            'email' => 'required|email|exists:users,email|unique:password_reset_tokens,email',
+        ], [
+            'email.required' => 'Моля въведете email!',
+            'email.email' => 'Моля въведете валиден email!',
+            'email.exists' => 'Този email адрес не съществува в системата.',
+            'email.unique' => 'Този email адрес вече е заявен за промяна/задаване на парола.(проверете си email-а)',
+        ]);
+
+
 
         $token = Str::random(64);
 
@@ -58,6 +70,8 @@ class ForgotPasswordController extends Controller
      */
     public function showResetPasswordForm($token)
     {
+        $this->deleteTokensOlderThanADay();
+        
         return view('forgetPasswordLink', ['token' => $token]);
     }
 
@@ -82,7 +96,7 @@ class ForgotPasswordController extends Controller
             'password.confirmed' => 'Потвърдената парола не съвпада с въведената парола.',
             'password_confirmation.required' => 'Моля потвърдете паролата!',
         ]);
-        
+
 
         $updatePassword = DB::table('password_reset_tokens')
             ->where([
