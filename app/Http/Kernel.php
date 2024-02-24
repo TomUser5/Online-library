@@ -25,7 +25,6 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
 use Spatie\Permission\Middlewares\PermissionMiddleware;
 use Spatie\Permission\Middlewares\RoleMiddleware;
-use Illuminate\Console\Scheduling\Schedule;
 
 
 class Kernel extends HttpKernel
@@ -68,12 +67,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
-
-    protected function schedule(Schedule $schedule): void
-    {
-        $schedule->command('auth:clear-resets')->dailyAt('00:00');
-    }
-
 
     /**
      * The application's middleware aliases.
