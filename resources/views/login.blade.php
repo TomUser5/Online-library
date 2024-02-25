@@ -62,9 +62,15 @@
                                         <p style="color: red;">{{ $message }}</p>
                                     </strong>
                                     @enderror
+
                                     <div class="form-floating">
                                         <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                                         <label for="floatingPassword">Парола</label>
+                                    </div>
+
+                                    <div class="form-check d-flex align-items-center mt-2 ml-0">
+                                        <input type="checkbox" class="form-check-input" id="showPassword" onclick="myFunction()">
+                                        <label class="form-check-label ps-2 pt-1" for="showPassword">Покажи паролата</label>
                                     </div>
                                     @error('password')
                                     <strong>
@@ -77,7 +83,7 @@
 
                                     <button class="btn btn-outline-light btn-lg px-5 mt-5" type="submit">Вход</button>
                                     <div class="form-floating pt-4">
-                                        <p>Ако профилът Ви е създаден днес и не сте си отваряли email-а за да зададете парола на профила - проверете си email-а, а в случай на забравена парола от <a href="{{ route('forget.password.get') }}">тук</a> можете да я смените.</p>
+                                        <p>Ако профилът Ви е създаден през последните 24 часа и не сте си отваряли email-а за да зададете парола на профила - проверете си email-а, а в случай на забравена парола от <a href="{{ route('forget.password.get') }}">тук</a> можете да я смените.</p>
                                     </div>
                                 </form>
 
@@ -88,6 +94,16 @@
             </div>
         </div>
     </section>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("floatingPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 </body>
 
 </html>

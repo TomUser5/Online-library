@@ -26,21 +26,43 @@ class AddUser extends Controller
         $selectedRole = $request->input('user_role');
         $class = $request->input('class_id');
 
-        $request = $request->validate([
-            'first_name' =>  'required',
-            'middle_name' =>  'required',
-            'last_name' =>  'required',
-            'user_role' => 'required',
-            'email' => 'required|email|unique:users,email',
-        ], [
-            'first_name' =>  'Моля въведете име!',
-            'middle_name' =>  'Моля въведете име!',
-            'last_name' =>  'Моля въведете име!',
-            'user_role' => 'Изберете роля!',
-            'email.required' => 'Моля въведете email!',
-            'email.email' => 'Моля въведете валиден email!',
-            'email.unique' => 'Този email вече е регистриран!',
-        ]);
+        if($selectedRole =='flexRadioStudent')
+        {
+            $request = $request->validate([
+                'first_name' =>  'required',
+                'middle_name' =>  'required',
+                'last_name' =>  'required',
+                'user_role' => 'required',
+                'email' => 'required|email|unique:users,email',
+                'class_id' => 'required',
+            ], [
+                'first_name' =>  'Моля въведете име!',
+                'middle_name' =>  'Моля въведете име!',
+                'last_name' =>  'Моля въведете име!',
+                'user_role' => 'Изберете роля!',
+                'email.required' => 'Моля въведете email!',
+                'email.email' => 'Моля въведете валиден email!',
+                'email.unique' => 'Този email вече е регистриран!',
+                'class_id.required' => 'Моля въведете клас!',
+            ]);
+        }
+        else {
+            $request = $request->validate([
+                'first_name' =>  'required',
+                'middle_name' =>  'required',
+                'last_name' =>  'required',
+                'user_role' => 'required',
+                'email' => 'required|email|unique:users,email',
+            ], [
+                'first_name' =>  'Моля въведете име!',
+                'middle_name' =>  'Моля въведете име!',
+                'last_name' =>  'Моля въведете име!',
+                'user_role' => 'Изберете роля!',
+                'email.required' => 'Моля въведете email!',
+                'email.email' => 'Моля въведете валиден email!',
+                'email.unique' => 'Този email вече е регистриран!',
+            ]);
+        }
         
         $user = User::create([
             'first_name' =>  $request['first_name'],

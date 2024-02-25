@@ -2,11 +2,15 @@
 
 @section('content')
 
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <form class="form" method="POST" action="{{ route('book.store') }}" enctype="multipart/form-data">
     @csrf
     <div class="d-flex flex-column">
-        <div class="mb-3">
-            <label class="form-label">Име:</label><br>
+        <div>
+            <label class="form-label">Име :</label><br>
             <input type="text" class="form-control" name="title" value="{{ old('title') }}"><br>
         </div>
         @error('title')
@@ -14,8 +18,8 @@
         @enderror
 
         <div class="mb-3">
-            <label class="form-label">Вид на материала:</label><br>
-            <select class="form-select" name="type_material_id">
+            <label class="form-label">Вид на материала :</label><br>
+            <select class="select2 form-select" name="type_material_id">
                 <option value="" disabled selected></option>
                 @foreach($type_materials as $type_material)
                 <option value="{{$type_material->id}}" {{ old('type_material_id') == $type_material->id ? 'selected' : '' }}>{{$type_material->type_material}}</option>
@@ -27,8 +31,8 @@
         @enderror
 
         <div class="mb-3">
-            <label class="form-label">Предмет за който се отнася материала:</label><br>
-            <select class="form-select" name="subject_id">
+            <label class="form-label">Предмет :</label><br>
+            <select class="select2 form-select" name="subject_id">
                 <option value="" disabled selected></option>
                 @foreach($subjects as $subject)
                 <option value="{{$subject->id}}" {{ old('subject_id') == $subject->id ? 'selected' : '' }}>{{$subject->subject}}</option>
@@ -36,13 +40,13 @@
             </select><br>
         </div>
 
-        @error('subjects_id')
+        @error('subject_id')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
         <div class="mb-3">
             <label class="form-label">Клас :</label><br>
-            <select class="form-select" name="class_id">
+            <select class="select2 form-select" name="class_id">
                 <option value="" disabled selected></option>
                 @foreach($classes as $class)
                 <option value="{{$class->id}}" {{ old('class_id') == $class->id ? 'selected' : '' }}>{{$class->class}}</option>
@@ -54,8 +58,8 @@
         @enderror
 
         <div class="mb-3">
-            <label class="form-label">Автор:</label><br>
-            <select class="form-select" name="author_id">
+            <label class="form-label">Автор :</label><br>
+            <select class="select2 form-select" name="author_id">
                 <option value="" disabled selected></option>
                 @foreach($authors as $author)
                 <option value="{{$author->id}}" {{ old('author_id') == $author->id ? 'selected' : '' }}>{{$author->first_name}} {{$author->last_name}}</option>
@@ -81,6 +85,14 @@
 
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            minimumResultsForSearch: Infinity
+        });
+    });
+</script>
 
 <script>
     var inputNames = ['name_bg', 'name_lat', 'leaves', 'flower', 'stem', 'root', 'model_3d', 'gallery_images'];

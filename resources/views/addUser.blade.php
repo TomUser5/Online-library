@@ -3,9 +3,9 @@
 @section('content')
 
 <style>
-    body {
+    /* body {
         background-color: #e6e6e6;
-    }
+    } */
 </style>
 
 <form class="form" method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data">
@@ -68,8 +68,14 @@
         </div>
         @endif
         <br>
+        @error('user_role')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
 
         <!-- Content sections -->
+        @error('class_id')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
         <div class="student-content role-content" style="display:none;">
             <div class="mb-3">
                 <label class="form-label">Клас на ученика :</label><br>
@@ -80,9 +86,6 @@
                     @endforeach
                 </select><br>
             </div>
-            @error('class')
-            <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
         </div>
 
         <div class="teacher-content role-content" style="display:none;">

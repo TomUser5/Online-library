@@ -24,8 +24,7 @@ class ForgotPasswordController extends Controller
     private function deleteTokensOlderThanADay()
     {
         // Calculate the date and time from one day ago
-        $oneDayAgo = Carbon::now()->subDay();
-
+        $oneDayAgo = Carbon::now('Europe/Sofia')->subDay();
         // Delete tokens where created_at is older than a day
         PasswordResetToken::where('created_at', '<', $oneDayAgo)->delete();
     }

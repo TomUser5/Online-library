@@ -14,7 +14,7 @@
         @enderror
 
         <div class="mb-3">
-            <label class="form-label">Фамилия:</label><br>
+            <label class="form-label">Фамилия :</label><br>
             <input type="text" class="form-control" name="last_name" value="{{ old('last_name') }}"><br>
         </div>
         @error('last_name')
