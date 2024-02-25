@@ -180,23 +180,23 @@
       </li>
       <li class="nav-item dropdown">
         <a href="#" class="nav-link {{ Request::routeIs('author.add') ? 'activePage' : '' }} {{ Request::routeIs('subject.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/plus--v1.png" alt="plus--v1"/>
+          <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/plus--v1.png" alt="plus--v1" />
           Разширено добавяне
         </a>
-          <ul class="dropdown-menu dropdown-menu-dark w-100">
-            <li><a class="dropdown-item {{ Request::routeIs('author.add') ? 'activePage' : '' }}" href="{{ route('author.add') }}">Автор</a></li>
-            <li><a class="dropdown-item {{ Request::routeIs('subject.add') ? 'activePage' : '' }}" href="{{ route('subject.add') }}">Учебен предмет</a></li>
-          </ul>
+        <ul class="dropdown-menu dropdown-menu-dark w-100">
+          <li><a class="dropdown-item {{ Request::routeIs('author.add') ? 'activePage' : '' }}" href="{{ route('author.add') }}">Автор</a></li>
+          <li><a class="dropdown-item {{ Request::routeIs('subject.add') ? 'activePage' : '' }}" href="{{ route('subject.add') }}">Учебен предмет</a></li>
+        </ul>
       </li>
       <li class="nav-item dropdown">
         <a href="#" class="nav-link {{ Request::routeIs('user.add') ? 'activePage' : '' }} {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/add-administrator.png" />
+          <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/add-administrator.png" />
           Добави потребител
         </a>
-          <ul class="dropdown-menu dropdown-menu-dark w-100">
-            <li><a class="dropdown-item {{ Request::routeIs('user.add') ? 'activePage' : '' }}" href="{{ route('user.add') }}">Ръчно</a></li>
-            <li><a class="dropdown-item {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-wrap" href="{{ route('view.user.import') }}">Чрез excel файл (само за ученици)</a></li>
-          </ul>
+        <ul class="dropdown-menu dropdown-menu-dark w-100">
+          <li><a class="dropdown-item {{ Request::routeIs('user.add') ? 'activePage' : '' }}" href="{{ route('user.add') }}">Ръчно</a></li>
+          <li><a class="dropdown-item {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-wrap" href="{{ route('view.user.import') }}">Чрез excel файл (само за ученици)</a></li>
+        </ul>
       </li>
       @endif
     </ul>
@@ -247,13 +247,13 @@
                 Материали
               </a>
               @if(!Teacher::where('user_id', Auth::user()->id)->exists() && !Admin::where('user_id', Auth::user()->id)->exists())
-              <ul class="dropdown-menu dropdown-menu-dark w-100">
+              <ul class="dropdown-menu dropdown-menu-dark w-100 height overflow-y-auto">
                 @foreach($classesStudent as $class)
                 <li><a class="dropdown-item" href="{{ route('materials', ['class' => $class->class]) }}">{{$class->class}}</a></li>
                 @endforeach
               </ul>
               @else
-              <ul class="dropdown-menu dropdown-menu-dark w-100">
+              <ul class="dropdown-menu dropdown-menu-dark w-100 height overflow-y-auto">
                 @foreach($classes as $class)
                 <li><a class="dropdown-item" href="{{ route('materials', ['class' => $class->class]) }}">{{$class->class}}</a></li>
                 @endforeach
@@ -279,15 +279,43 @@
                 Качване на книги
               </a>
             </li>
-            <li>
-              <a href="{{ route('user.add') }}" class="nav-link {{ Request::routeIs('user.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0">
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link {{ Request::routeIs('author.add') ? 'activePage' : '' }} {{ Request::routeIs('subject.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/plus--v1.png" alt="plus--v1" />
+                Разширено добавяне
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark w-100">
+                <li><a class="dropdown-item {{ Request::routeIs('author.add') ? 'activePage' : '' }}" href="{{ route('author.add') }}">Автор</a></li>
+                <li><a class="dropdown-item {{ Request::routeIs('subject.add') ? 'activePage' : '' }}" href="{{ route('subject.add') }}">Учебен предмет</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link {{ Request::routeIs('user.add') ? 'activePage' : '' }} {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/add-administrator.png" />
                 Добави потребител
               </a>
+              <ul class="dropdown-menu dropdown-menu-dark w-100">
+                <li><a class="dropdown-item {{ Request::routeIs('user.add') ? 'activePage' : '' }}" href="{{ route('user.add') }}">Ръчно</a></li>
+                <li><a class="dropdown-item {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-wrap" href="{{ route('view.user.import') }}">Чрез excel файл (само за ученици)</a></li>
+              </ul>
             </li>
             @endif
+            <li>
+              <div class="dropdown fs-5 text-wrap bottom-0 start-0 ms-2 mb-3" style="width: 85%;">
+                <a href="#" class="text-white text-decoration-none dropdown-toggle text-wrap" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <strong>{{Auth::user()->first_name}} {{Auth::user()->middle_name}} {{Auth::user()->last_name}}</strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                  <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="dropdown-item">Изход</button>
+                  </form>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
+
       </div>
     </nav>
 
