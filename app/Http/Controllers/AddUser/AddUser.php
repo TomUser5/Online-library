@@ -97,6 +97,7 @@ class AddUser extends Controller
             ]);
         }
 
+        session()->flash('success', 'Потребителя е успешно добавен!');
         return redirect()->route("index");
     }
 
@@ -121,7 +122,7 @@ class AddUser extends Controller
         return redirect()->route('view.user.import')->with('message', 'В файла има грешка, проверете дали всички имена присъстват, дали имейлите са валидни и дали някои от тях вече нямат създадени профили!');
     }
 
-    // If import was successful, redirect to index
+    session()->flash('success', 'Потребителите са успешно добавени!');
     return redirect()->route('index');
     }
     

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise_Material;
+use App\Models\PasswordResetToken;
 use App\Models\Read_Material;
 use App\Models\School_class;
+use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;

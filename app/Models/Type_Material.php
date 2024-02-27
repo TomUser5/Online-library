@@ -11,7 +11,7 @@ class Type_Material extends Model
 
     protected $table = 'type_materials';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'type_material',

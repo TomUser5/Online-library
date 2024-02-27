@@ -26,7 +26,7 @@ class addSubjectController extends Controller
 
         $subject->save();
 
-        //session()->flash('success', 'Материала е успешно добавен!');
+        session()->flash('success', 'Учебния предмет е успешно добавен!');
         return redirect()->route('index');
     }
 }
