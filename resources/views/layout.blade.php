@@ -179,13 +179,14 @@
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a href="#" class="nav-link {{ Request::routeIs('author.add') ? 'activePage' : '' }} {{ Request::routeIs('subject.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <a href="#" class="nav-link {{ Request::routeIs('author.add') ? 'activePage' : '' }} {{ Request::routeIs('subject.add') ? 'activePage' : '' }} {{ Request::routeIs('type.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/plus--v1.png" alt="plus--v1" />
           Разширено добавяне
         </a>
         <ul class="dropdown-menu dropdown-menu-dark w-100">
           <li><a class="dropdown-item {{ Request::routeIs('author.add') ? 'activePage' : '' }}" href="{{ route('author.add') }}">Автор</a></li>
           <li><a class="dropdown-item {{ Request::routeIs('subject.add') ? 'activePage' : '' }}" href="{{ route('subject.add') }}">Учебен предмет</a></li>
+          <li><a class="dropdown-item {{ Request::routeIs('type.add') ? 'activePage' : '' }}" href="{{ route('type.add') }}">Вид файл</a></li>
         </ul>
       </li>
       <li class="nav-item dropdown">
@@ -280,13 +281,14 @@
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link {{ Request::routeIs('author.add') ? 'activePage' : '' }} {{ Request::routeIs('subject.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a href="#" class="nav-link {{ Request::routeIs('author.add') ? 'activePage' : '' }} {{ Request::routeIs('subject.add') ? 'activePage' : '' }} {{ Request::routeIs('type.add') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/plus--v1.png" alt="plus--v1" />
                 Разширено добавяне
               </a>
               <ul class="dropdown-menu dropdown-menu-dark w-100">
                 <li><a class="dropdown-item {{ Request::routeIs('author.add') ? 'activePage' : '' }}" href="{{ route('author.add') }}">Автор</a></li>
                 <li><a class="dropdown-item {{ Request::routeIs('subject.add') ? 'activePage' : '' }}" href="{{ route('subject.add') }}">Учебен предмет</a></li>
+                <li><a class="dropdown-item {{ Request::routeIs('type.add') ? 'activePage' : '' }}" href="{{ route('type.add') }}">Вид файл</a></li>
               </ul>
             </li>
             <li class="nav-item dropdown">

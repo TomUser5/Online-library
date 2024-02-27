@@ -2,14 +2,14 @@
 
 @section('content')
 
-<form class="form" method="POST" action="{{ route('subject.store') }}">
+<form class="form" method="POST" action="{{ route('type.store') }}">
     @csrf
     <div class="d-flex flex-column">
         <div class="mb-3">
-            <label class="form-label">Име на учебения предмет :</label><br>
-            <input type="text" class="form-control" name="subject" value="{{ old('subject') }}"><br>
+            <label class="form-label">Вид файл :</label><br>
+            <input type="text" class="form-control" name="type" value="{{ old('type') }}"><br>
         </div>
-        @error('subject')
+        @error('type')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 

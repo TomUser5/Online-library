@@ -2,6 +2,11 @@
 
 @section('content')
 <section class="container mt-3">
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
         <div class="row mt-3">
             <h3>Препоръчани книги</h3>
             <div class="container mt-2">

@@ -66,7 +66,7 @@ class AddMaterialController extends Controller
 
         $herb->save();
 
-        //session()->flash('success', 'Материала е успешно добавен!');
+        session()->flash('success', 'Материала е успешно добавен!');
         return redirect()->route('index');
     }
 }

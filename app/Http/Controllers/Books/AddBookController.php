@@ -71,7 +71,7 @@ class AddBookController extends Controller
 
         $herb->save();
 
-        //session()->flash('success', 'Материала е успешно добавен!');
+        session()->flash('success', 'Книгата е успешно добавена!');
         return redirect()->route('index');
     }
 }

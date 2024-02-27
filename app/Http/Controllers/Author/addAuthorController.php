@@ -29,7 +29,7 @@ class addAuthorController extends Controller
 
         $author->save();
 
-        //session()->flash('success', 'Материала е успешно добавен!');
+        session()->flash('success', 'Автора е успешно добавен!');
         return redirect()->route('index');
     }
 }

@@ -59,15 +59,12 @@ class AuthController extends Controller
         ]);
 
         if ($this->attemptLoginStudent($request)) {
-            session()->flash('success', 1);
             return redirect()->route("index");
         } elseif ($this->attemptLoginTeacher($request)) {
             $role = 'teacher';
-            session()->flash('success', 1);
             return redirect()->route("index", compact('role'));   
         } elseif ($this->attemptLoginAdmin($request)) {
-            //$role = 12;
-            session()->flash('success', 1);    
+            //$role = 12;  
             //session(['role' => $role]);
             return redirect()->route("index");
         }
