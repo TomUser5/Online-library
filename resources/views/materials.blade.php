@@ -45,7 +45,7 @@
                 @endphp
                 <h4>{{ $material->title }}</h4>
                 <p>Разширение: {{$fileExtension}}</p>
-                <a class="file-link btn btnColor" href="{{$material->location}}" download>Изтегли</a>
+                <a class="file-link btn btnColor" href="/{{$material->location}}" download>Изтегли</a>
             </div>
             @endforeach
         </div>
