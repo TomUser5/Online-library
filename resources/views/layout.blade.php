@@ -66,6 +66,11 @@
       max-height: 30vh;
       scrollbar-width: none;
     }
+
+    .height2 {
+      max-height: 20vh;
+      scrollbar-width: none;
+    }
   </style>
 </head>
 
@@ -199,6 +204,17 @@
           <li><a class="dropdown-item {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-wrap" href="{{ route('view.user.import') }}">Чрез excel файл (само за ученици)</a></li>
         </ul>
       </li>
+      <li class="nav-item dropdown">
+              <a href="#" class="nav-link {{ Request::routeIs('materials') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/reading.png" />
+                Поребители
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark w-100 height2 overflow-y-auto">
+                @foreach($classes as $class)
+                <li><a class="dropdown-item" href="{{ route('users', ['class' => $class->class]) }}">{{$class->class}}</a></li>
+                @endforeach
+              </ul>
+            </li>
       @endif
     </ul>
     <hr>
@@ -299,6 +315,17 @@
               <ul class="dropdown-menu dropdown-menu-dark w-100">
                 <li><a class="dropdown-item {{ Request::routeIs('user.add') ? 'activePage' : '' }}" href="{{ route('user.add') }}">Ръчно</a></li>
                 <li><a class="dropdown-item {{ Request::routeIs('view.user.import') ? 'activePage' : '' }} text-wrap" href="{{ route('view.user.import') }}">Чрез excel файл (само за ученици)</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link {{ Request::routeIs('materials') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/reading.png" />
+                Поребители
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark w-100 height2 overflow-y-auto">
+                @foreach($classes as $class)
+                <li><a class="dropdown-item" href="{{ route('users', ['class' => $class->class]) }}">{{$class->class}}</a></li>
+                @endforeach
               </ul>
             </li>
             @endif

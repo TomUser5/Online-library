@@ -16,6 +16,8 @@ use App\Http\Controllers\Subject\viewAddSubject;
 use App\Http\Controllers\Subject\viewAddSubjectController;
 use App\Http\Controllers\TypeFile\addTypeFile;
 use App\Http\Controllers\TypeFile\viewTypeFile;
+use App\Http\Controllers\Users\deleteUserController;
+use App\Http\Controllers\Users\viewUserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -68,6 +70,8 @@ Route::middleware(['isTeacher'])->group(function () {
     Route::post('/import/users', [AddUser::class, 'importUsers'])->name("user.import");
     Route::get('/add/type', [viewTypeFile::class, 'view'])->name("type.add");
     Route::post('/store/type', [addTypeFile::class, 'store'])->name("type.store");
+    Route::get('/users/{class}', [viewUserController::class, 'viewUsers'])->name('users');
+    Route::delete('/users/delete/{id}', [deleteUserController::class, 'deleteUser'])->name('user.delete');
 });
 
 Route::middleware(['isAdmin'])->group(function () {
@@ -85,6 +89,8 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/import/users', [AddUser::class, 'importUsers'])->name("user.import");
     Route::get('/add/type', [viewTypeFile::class, 'view'])->name("type.add");
     Route::post('/store/type', [addTypeFile::class, 'store'])->name("type.store");
+    Route::get('/users/{class}', [viewUserController::class, 'viewUsers'])->name('users');
+    Route::delete('/users/delete/{id}', [deleteUserController::class, 'deleteUser'])->name('user.delete');
 });
 
 // php artisan cache:clear
