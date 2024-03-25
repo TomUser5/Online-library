@@ -20,9 +20,17 @@
       top: 0;
       height: 100vh;
       overflow-y: auto;
-      /* Add this to enable scrolling within the sidebar */
     }
 
+    @media (max-height: 727px) {
+    .sticky-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100%;
+      overflow-y: auto;
+    }
+    }
+    
     /* Adjust the width as needed */
     .content-container {
       width: 100%;
@@ -217,10 +225,13 @@
             </li>
       @endif
     </ul>
+
     <hr>
+    <br>
+    <br>
 
     <!-- User -->
-    <div class="dropdown fs-5 text-wrap d-flex align-items-end position-absolute bottom-0 start-0 ms-3 mb-3" style="width: 85%;">
+    <div class="dropdown fs-5 text-wrap position-absolute bottom-0 start-0 ms-3 mb-3" style="width: 85%;">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle text-wrap" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <strong>{{Auth::user()->first_name}} {{Auth::user()->middle_name}} {{Auth::user()->last_name}}</strong>
       </a>
