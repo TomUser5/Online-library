@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">{{$book->title}}</h5>
-            <p class="card-text">Автор: {{$book->author->first_name}} {{$book->author->last_name}} <br> Специалност: {{$book->subject->subject}}</p>
+            <p class="card-text">Автор: {{$book->author->first_name}} {{$book->author->last_name}} <br> Специалност: {{$book->subject->subject}} <br> Предназначено за: {{$book->class->class}} клас</p>
             <a class="btn btnColor" href="{{$book->location}}">Изтегли</a>
           </div>
         </div>

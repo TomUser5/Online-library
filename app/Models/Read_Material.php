@@ -31,4 +31,8 @@ class Read_Material extends Model
     {
         return $this->belongsTo(Author::class);
     }
+    public function class()
+    {
+        return $this->belongsTo(School_class::class);
+    }
 }

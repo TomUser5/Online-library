@@ -10,6 +10,7 @@ use App\Http\Controllers\Books\AddBookController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Materials\AddMaterialController;
+use App\Http\Controllers\Materials\deleteMaterialController;
 use App\Http\Controllers\Materials\ViewMaterialController;
 use App\Http\Controllers\Subject\addSubjectController;
 use App\Http\Controllers\Subject\viewAddSubject;
@@ -72,6 +73,7 @@ Route::middleware(['isTeacher'])->group(function () {
     Route::post('/store/type', [addTypeFile::class, 'store'])->name("type.store");
     Route::get('/users/{class}', [viewUserController::class, 'viewUsers'])->name('users');
     Route::delete('/users/delete/{id}', [deleteUserController::class, 'deleteUser'])->name('user.delete');
+    Route::delete('/material/delete/{id}', [deleteMaterialController::class, 'deleteMaterial'])->name('material.delete');
 });
 
 Route::middleware(['isAdmin'])->group(function () {
@@ -91,6 +93,7 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::post('/store/type', [addTypeFile::class, 'store'])->name("type.store");
     Route::get('/users/{class}', [viewUserController::class, 'viewUsers'])->name('users');
     Route::delete('/users/delete/{id}', [deleteUserController::class, 'deleteUser'])->name('user.delete');
+    Route::delete('/material/delete/{id}', [deleteMaterialController::class, 'deleteMaterial'])->name('material.delete');
 });
 
 // php artisan cache:clear

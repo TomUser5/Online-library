@@ -30,24 +30,34 @@
 
     .file-link {
         display: inline-block;
-        margin-top: 10px;
     }
 </style>
-    <div class="container">
-        <h2 class="mt-3 mb-4">Материали за {{$class}} клас:</h2>
+<div class="container">
+    <h2 class="mt-3 mb-4">Материали за {{$class}} клас:</h2>
 
-        <div class="material-section">
-            @foreach($materials as $material)
-            <div class="material-item">
-                @php
-                $filePath = $material->location;
-                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-                @endphp
-                <h4>{{ $material->title }}</h4>
-                <p>Разширение: {{$fileExtension}}</p>
-                <a class="file-link btn btnColor" href="/{{$material->location}}" download>Изтегли</a>
+    <div class="material-section">
+        @foreach($materials as $material)
+        <div class="material-item">
+            @php
+            $filePath = $material->location;
+            $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+            @endphp
+            <h4>{{ $material->title }}</h4>
+            <p>Разширение: {{$fileExtension}}</p>
+            <div class="d-flex flex-row mt-4">
+                <a class="btn btnColor" href="/{{$material->location}}" download>Изтегли</a>
+
+                @if(\App\Models\Admin::where('user_id', Auth::user()->id)->exists() || \App\Models\Teacher::where('user_id', Auth::user()->id)->exists())
+                <form action="{{ route('material.delete', $material->id) }}" class="ms-4" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Изтриване</button>
+                </form>
+                @endif
+
             </div>
-            @endforeach
         </div>
+        @endforeach
     </div>
-    @endsection
+</div>
+@endsection
