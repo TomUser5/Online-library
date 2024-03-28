@@ -24,7 +24,23 @@ class AuthController extends Controller
     //         'last_name' => 'Цонев',
     //         'email' => 'ivotsonev2007@gmail.com',
     //         'password' => Hash::make('Ivo123Tsonev'),
-    //123Ivo123
+    // //123Ivo123
+    //     ]);
+
+    //     Auth::login($user);
+
+    //     return redirect()->route("index");
+    // }
+
+    //     public function storeUser()
+    // {
+    //     $user = User::create([
+    //         'first_name' => 'Иво',
+    //         'middle_name' => 'Ивелинов',
+    //         'last_name' => 'Цонев',
+    //         'email' => 'ivotsonev@gmail.com',
+    //         'password' => Hash::make('Ivo123Ivo'),
+    // //123Ivo123
     //     ]);
 
     //     Auth::login($user);

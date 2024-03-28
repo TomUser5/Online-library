@@ -213,11 +213,13 @@
         </ul>
       </li>
       <li class="nav-item dropdown">
-              <a href="#" class="nav-link {{ Request::routeIs('materials') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/reading.png" />
+              <a href="#" class="nav-link {{ Request::routeIs('users') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/google-groups.png" alt="google-groups"/>
+              <img width="35" height="35" src="https://img.icons8.com/glyph-neue/64/FFFFFF/group--v1.png" alt="group--v1"/>
                 Поребители
               </a>
               <ul class="dropdown-menu dropdown-menu-dark w-100 height2 overflow-y-auto">
+                <li><a class="dropdown-item" href="{{ route('teachers') }}">Учители</a></li>
                 @foreach($classes as $class)
                 <li><a class="dropdown-item" href="{{ route('users', ['class' => $class->class]) }}">{{$class->class}}</a></li>
                 @endforeach
@@ -329,11 +331,13 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a href="#" class="nav-link {{ Request::routeIs('materials') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/reading.png" />
+              <a href="#" class="nav-link {{ Request::routeIs('users') ? 'activePage' : '' }} text-white fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/google-groups.png" alt="google-groups"/>
+              <img width="35" height="35" src="https://img.icons8.com/glyph-neue/64/FFFFFF/group--v1.png" alt="group--v1"/>
                 Поребители
               </a>
               <ul class="dropdown-menu dropdown-menu-dark w-100 height2 overflow-y-auto">
+                <li><a class="dropdown-item" href="{{ route('teachers') }}">Учители</a></li>
                 @foreach($classes as $class)
                 <li><a class="dropdown-item" href="{{ route('users', ['class' => $class->class]) }}">{{$class->class}}</a></li>
                 @endforeach

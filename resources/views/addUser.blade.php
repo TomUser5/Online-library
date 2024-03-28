@@ -89,7 +89,15 @@
         </div>
 
         <div class="teacher-content role-content" style="display:none;">
-            <!-- Add content for teachers here -->
+        <div class="mb-3">
+                <label class="form-label">Преподава по :</label><br>
+                <select class="form-select" name="subject_id">
+                    <option value="" disabled selected></option>
+                    @foreach($subjects as $subject)
+                    <option value="{{$subject->id}}" {{ old('subject') == $subject->id ? 'selected' : '' }}>{{$subject->subject}}</option>
+                    @endforeach
+                </select><br>
+            </div>
         </div>
 
         <div style="width:100%;">

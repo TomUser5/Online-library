@@ -42,15 +42,50 @@
 
             <div class="material-section">
                 @foreach($materials as $material)
+
+                @php
+                $filePath = $material->location;
+                $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
+                $startsWithD = (substr($filePath, 0, 1) === 'd');
+                @endphp
+
+                @if($startsWithD)
                 <div class="material-item">
-                    @php
-                    $filePath = $material->location;
-                    $fileExtension = pathinfo($filePath, PATHINFO_EXTENSION);
-                    @endphp
                     <h4>{{ $material->title }}</h4>
-                    <p>Разширение: {{$fileExtension}} <br> Добавен {{ $material->timeDifference }}</p>
-                    <a class="file-link btn btnColor" href="{{$material->location}}" download>Изтегли</a>
+                    <!-- <p>Вид: {{$fileExtension}}</p> -->
+                    <p>Вид: {{$material->type_material->type_material}}</p>
+                    <div class="d-flex flex-row mt-4">
+                        <a class="btn btnColor" href="/{{$material->location}}" download>Изтегли</a>
+
+                        @if(\App\Models\Admin::where('user_id', Auth::user()->id)->exists() || \App\Models\Teacher::where('user_id', Auth::user()->id)->exists())
+                        <form action="{{ route('material.delete', $material->id) }}" class="ms-4" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Изтриване</button>
+                        </form>
+                        @endif
+
+                    </div>
                 </div>
+                @else
+                <div class="material-item">
+                    <a href="{{$material->location}}" target=”_blank”>
+                        <h4>{{ $material->title }}</h4>
+                    </a>
+                    <p>Вид: {{$material->type_material->type_material}}</p>
+                    <div class="d-flex flex-row mt-4">
+                        @if(\App\Models\Admin::where('user_id', Auth::user()->id)->exists() || \App\Models\Teacher::where('user_id', Auth::user()->id)->exists())
+                        <form action="{{ route('material.delete', $material->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger" type="submit">Изтриване</button>
+                        </form>
+                        @endif
+
+                    </div>
+                </div>
+                @endif
+
                 @endforeach
             </div>
         </div>
@@ -59,7 +94,7 @@
             <h2 class="mt-3 mb-4">Книги:</h2>
 
             <div class="material-section">
-            @foreach($books as $book)
+                @foreach($books as $book)
                 <div class="material-item">
                     <h4>{{$book->title}}</h4>
                     <p>Автор: {{$book->author->first_name}} {{$book->author->last_name}} <br> Специалност: {{$book->subject->subject}} <br> Добавена {{ $book->timeDifference }}</p>

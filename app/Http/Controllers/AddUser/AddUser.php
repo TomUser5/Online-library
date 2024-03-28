@@ -7,6 +7,7 @@ use App\Imports\ImportUser;
 use App\Models\Admin;
 use App\Models\Student;
 use App\Models\Teacher;
+use App\Models\Teacher_Subject;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -25,6 +26,7 @@ class AddUser extends Controller
         
         $selectedRole = $request->input('user_role');
         $class = $request->input('class_id');
+        $subjectTeacher = $request->input('subject_id');
 
         if($selectedRole =='flexRadioStudent')
         {
@@ -85,8 +87,15 @@ class AddUser extends Controller
         if($selectedRole =='flexRadioTeacher')
         {
             $userId = $user->id;
-            Teacher::create([
-                'user_id' =>  $userId,
+            $newTeacher = Teacher::create([
+                'user_id' => $userId,
+            ]);
+            
+            $newTeacherId = $newTeacher->id;
+            
+            Teacher_Subject::create([
+                'teacher_id' =>  $newTeacherId,
+                'subject_id' =>   $subjectTeacher,
             ]);
         }
         if($selectedRole =='flexRadioAdmin')
