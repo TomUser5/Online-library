@@ -11,7 +11,7 @@ class Teacher_Subject extends Model
 
     protected $table = 'teacher_subject';
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
         'teacher_id',

@@ -25,8 +25,8 @@
         @enderror
 
         <div class="mb-3">
-            <label class="form-label">Разширениe :</label><br>
-            <select class="select2 form-select" name="type_material_id">
+            <label class="form-label">Вид на файла :</label><br>
+            <select class="select2 form-select" id="type_material" name="type_material_id">
                 <option value="" disabled selected></option>
                 @foreach($type_materials as $type_material)
                 <option value="{{$type_material->id}}" {{ old('type_material_id') == $type_material->id ? 'selected' : '' }}>{{$type_material->type_material}}</option>
@@ -65,11 +65,19 @@
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
-        <div class="mb-3">
+        <div class="mb-3" id="document_div">
             <label class="form-label">Избери файл</label> &nbsp;
             <input class="form-control" type="file" name="document" accept=".doc, .docx, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, .xls, .xlsx, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .ppt, .pptx, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation">
         </div>
         @error('document')
+        <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+
+        <div id="link_div" style="display: none;">
+            <label class="form-label">Линк :</label><br>
+            <input type="text" class="form-control" name="link" value="{{ old('link') }}"><br>
+        </div>
+        @error('link')
         <div class="alert alert-danger">{{ $message }}</div>
         @enderror
 
@@ -80,6 +88,24 @@
 
     </div>
 </form>
+
+<script>
+    $(document).ready(function() {
+        $('#type_material').select2().on('change', function() {
+            var selectedText = $(this).find("option:selected").text();
+            if (selectedText.trim() === "линк") {
+                $('#document_div').hide();
+                $('#link_div').show();
+            } else {
+                $('#document_div').show();
+                $('#link_div').hide();
+            }
+        });
+    });
+</script>
+
+
+
 
 <script>
     $(document).ready(function() {

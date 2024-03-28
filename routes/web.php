@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/store', [AuthController::class, 'storeUser'])->name('store');
+//Route::get('/store', [AuthController::class, 'storeUser'])->name('store');
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/', [AuthController::class, 'login'])->name("login");
@@ -74,6 +74,7 @@ Route::middleware(['isTeacher'])->group(function () {
     Route::get('/users/{class}', [viewUserController::class, 'viewUsers'])->name('users');
     Route::delete('/users/delete/{id}', [deleteUserController::class, 'deleteUser'])->name('user.delete');
     Route::delete('/material/delete/{id}', [deleteMaterialController::class, 'deleteMaterial'])->name('material.delete');
+    Route::get('/teachers', [viewUserController::class, 'viewTeachers'])->name('teachers');
 });
 
 Route::middleware(['isAdmin'])->group(function () {
@@ -94,6 +95,7 @@ Route::middleware(['isAdmin'])->group(function () {
     Route::get('/users/{class}', [viewUserController::class, 'viewUsers'])->name('users');
     Route::delete('/users/delete/{id}', [deleteUserController::class, 'deleteUser'])->name('user.delete');
     Route::delete('/material/delete/{id}', [deleteMaterialController::class, 'deleteMaterial'])->name('material.delete');
+    Route::get('/teachers', [viewUserController::class, 'viewTeachers'])->name('teachers');
 });
 
 // php artisan cache:clear
