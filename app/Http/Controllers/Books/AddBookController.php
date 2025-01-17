@@ -33,7 +33,7 @@ class AddBookController extends Controller
                 'subject_id' => 'required',
                 'class_id' => 'required',
                 'author_id' => 'required',
-                'document' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx,pdf|max:8119',
+                'document' => 'required|max:8119',
             ],
             [
                 'title.required' => 'Полето е задължително да се попълни!',
@@ -42,7 +42,6 @@ class AddBookController extends Controller
                 'class_id.required' => 'Задължително е да се избере опция!',
                 'author_id.required' => 'Задължително е да се избере опция!',
                 'document.required' => 'Документът е задължителен!',
-                'document.mimes' => 'Моля, изберете документ в поддържан формат: .doc, .docx, .xls, .xlsx, .ppt, .pptx',
                 'document.max' => 'Документът трябва да бъде под 8 MB',
             ]
         );

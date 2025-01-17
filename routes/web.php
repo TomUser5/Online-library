@@ -54,12 +54,14 @@ Route::group(['middleware' => 'auth'], function () {
         Auth::logout();
         return redirect()->route('login');
     })->name('logout');
+    Route::post('/results', [ViewMaterialController::class, 'search'])->name('search');
+    Route::get('/results/{searchedWord}/{class}', [ViewMaterialController::class, 'searchWord'])->name('search.results');
 });
 
 Route::middleware(['isTeacher'])->group(function () {
     Route::get('/add/material', [AddMaterialController::class, 'viewAddMaterial'])->name("material.add");
     Route::post('/material/store', [AddMaterialController::class, 'store'])->name("material.store");
-    Route::get('/book/add/', [AddBookController::class, 'viewAddBook'])->name("book.add");
+    Route::get('add/book/', [AddBookController::class, 'viewAddBook'])->name("book.add");
     Route::post('/store/book', [AddBookController::class, 'store'])->name("book.store");
     Route::get('/add/user', [viewAddUser::class, 'view'])->name("user.add");
     Route::post('/store/user', [AddUser::class, 'store'])->name("user.store");

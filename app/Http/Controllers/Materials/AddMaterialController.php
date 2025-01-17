@@ -26,7 +26,7 @@ class AddMaterialController extends Controller
     {
         $typeMaterial = Type_Material::where('id', $request->input('type_material_id'))->first();
 
-        $isLink = $typeMaterial && $typeMaterial->type_material == "линк";
+        $isLink = $typeMaterial && $typeMaterial->type_material == "Линк";
         
         if($isLink)
         {
@@ -73,7 +73,7 @@ class AddMaterialController extends Controller
                     'type_material_id' => 'required',
                     'subject_id' => 'required',
                     'class_id' => 'required',
-                    'document' => 'required|mimes:doc,docx,xls,xlsx,ppt,pptx|max:8119',
+                    'document' => 'required|max:8119',
                 ],
                 [
                     'title.required' => 'Полето е задължително да се попълни!',
@@ -81,7 +81,6 @@ class AddMaterialController extends Controller
                     'subject_id.required' => 'Задължително е да се избере опция!',
                     'class_id.required' => 'Задължително е да се избере опция!',
                     'document.required' => 'Документът е задължителен!',
-                    'document.mimes' => 'Моля, изберете документ в поддържан формат: .doc, .docx, .xls, .xlsx, .ppt, .pptx',
                     'document.max' => 'Документът трябва да бъде под 8 MB',
                 ]
             );
@@ -91,12 +90,15 @@ class AddMaterialController extends Controller
             $loc = 'documents/'.$file->getClientOriginalName();
             $user = Auth::user()->id;
             $id = Teacher::where('user_id', $user)->first()->id;
+
+            $fileType = substr(strrchr( $file->getClientOriginalName(), '.'), 1);
+            $type_file = Type_Material::where('type_material', $fileType)->first()->id;
     
             $herb = new Exercise_Material();
             $herb->fill([
                 'title' => $request['title'],
                 'location' => $loc,
-                'type_material_id' => $request->input('type_material_id'),
+                'type_material_id' => $type_file,
                 'subject_id' =>$request->input('subject_id'),
                 'class_id' => $request->input('class_id'),
                 'teacher_id' => $id,
