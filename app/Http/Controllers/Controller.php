@@ -6,29 +6,54 @@ use App\Models\Exercise_Material;
 use App\Models\PasswordResetToken;
 use App\Models\Read_Material;
 use App\Models\School_class;
+use App\Models\Author;
+use App\Models\Subject;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    public function index () {
+    public function index()
+    {
         //$role = session('role');
         //return view('index', compact('role'));
         return view('index');
     }
 
-    public function books () {
-        $books = Read_Material::all();
+    public function books(Request $request)
+    {
+        $query = Read_Material::with(['author', 'subject', 'class']);
+    
+        if ($request->has('authors')) {
+            $query->whereIn('author_id', $request->authors);
+        }
+    
+        if ($request->has('subjects')) {
+            $query->whereIn('subject_id', $request->subjects);
+        }
+    
+        if ($request->has('classes')) {
+            $query->whereIn('class_id', $request->classes);
+        }
+    
+        $books = $query->get();
+    
+        $authors = Author::all();
+        $subjects = Subject::all();
+        $classes = School_class::all();
+    
+        return view('books', compact('books', 'authors', 'subjects', 'classes'));
+    }    
 
-        return view('books', compact('books'));
-    }
-
-    public function viewRecentlyAdded() {
+    public function viewRecentlyAdded()
+    {
         $materials = Exercise_Material::orderBy('created_at', 'desc')->get();
         $books = Read_Material::orderBy('created_at', 'desc')->get();
 

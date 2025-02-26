@@ -47,7 +47,23 @@
     }
 </style>
 <div class="container">
-    <h2 class="mt-3 mb-4">Материали за {{$class}} клас:</h2>
+
+<?php
+$lastChar = substr($class, 1);
+$firstChar = substr($class, 0, 1);
+$specificClass = 58;
+
+if ($lastChar === 'а') {
+    $specificClass = "приложно програмиране";
+} elseif ($lastChar === 'б') {
+    $specificClass = "софтуерни и хардуерни науки";
+} elseif ($lastChar === 'в') {
+    $specificClass = "природни науки – биология";
+}
+?>
+
+
+    <h2 class="mt-3 mb-4">Материали за {{$firstChar}} клас {{$specificClass}}:</h2>
 
     <div class="material-section">
     <div class="searchBar" style="background-color: #e6e6e6;">

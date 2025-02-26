@@ -13,11 +13,16 @@ class deleteMaterialController extends Controller
     {
         try {
             $fileLocation = Exercise_Material::where('id', '=', $materialId)->value('location');
+
+            if (filter_var($fileLocation, FILTER_VALIDATE_URL)) {
+                //The location is a URL, not a file.
+            } else {
+                $file_path = public_path($fileLocation);
             
-            // Construct the full file path
-            $file_path = public_path($fileLocation);
-            
-            unlink($file_path);
+                if (file_exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
 
             Exercise_Material::where('id', '=', $materialId)
                 ->delete();

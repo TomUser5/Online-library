@@ -223,7 +223,7 @@
               <a href="#" class="nav-link {{ Request::routeIs('users') ? 'activePage' : '' }} text-color fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/google-groups.png" alt="google-groups"/>
               <img width="35" height="35" src="https://img.icons8.com/glyph-neue/64/FFFFFF/group--v1.png" alt="group--v1"/>
-                Поребители
+                Потребители
               </a>
               <ul class="dropdown-menu dropdown-menu-dark w-100 height2 overflow-y-auto">
                 <li><a class="dropdown-item" href="{{ route('teachers') }}">Учители</a></li>
@@ -256,10 +256,9 @@
 
   <!-- Navbar for smaller screen -->
   <div class="content-container">
-    <!-- Navbar for smaller screens -->
     <nav class="navbar navbar-expand-lg text-color fixed-top d-lg-none background">
       <div class="container-fluid">
-        <a class="navbar-brand text-color fs-3" href="{{route('index')}}">STEM.lib</a>
+        <a class="navbar-brand text-color fs-1" href="{{route('index')}}">STEM.lib</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white; color: white !important;">
           <img width="35" height="40" src="https://img.icons8.com/ios-glyphs/30/FFFFFF/menu--v3.png" alt="menu--v3" />
         </button>
@@ -341,7 +340,7 @@
               <a href="#" class="nav-link {{ Request::routeIs('users') ? 'activePage' : '' }} text-color fs-5 ps-1 pe-0 dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img width="35" height="35" src="https://img.icons8.com/ios/50/FFFFFF/google-groups.png" alt="google-groups"/>
               <img width="35" height="35" src="https://img.icons8.com/glyph-neue/64/FFFFFF/group--v1.png" alt="group--v1"/>
-                Поребители
+                Потребители
               </a>
               <ul class="dropdown-menu dropdown-menu-dark w-100 height2 overflow-y-auto">
                 <li><a class="dropdown-item" href="{{ route('teachers') }}">Учители</a></li>

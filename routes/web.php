@@ -7,6 +7,7 @@ use App\Http\Controllers\Author\addAuthorController;
 use App\Http\Controllers\Author\viewAddAuthor;
 use App\Http\Controllers\Author\viewAddAuthorController;
 use App\Http\Controllers\Books\AddBookController;
+use App\Http\Controllers\Books\ViewAndFilterController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\Materials\AddMaterialController;
@@ -47,6 +48,7 @@ Route::group(['middleware' => 'guest'], function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', [Controller::class, 'index'])->name("index");
     Route::get('/books', [Controller::class, 'books'])->name("books");
+    Route::get('/filteredBooks', [ViewAndFilterController::class, 'filter'])->name("books.filter");
     Route::get('/recentlyAdded', [Controller::class, 'viewRecentlyAdded'])->name("recentryAdded");
     Route::get('/materials/{class}', [ViewMaterialController::class, 'viewMaterial'])->name('materials');
     //Route::post('/logout', [AuthController::class, 'logoutF'])->name('logout');
@@ -56,6 +58,8 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('logout');
     Route::post('/results', [ViewMaterialController::class, 'search'])->name('search');
     Route::get('/results/{searchedWord}/{class}', [ViewMaterialController::class, 'searchWord'])->name('search.results');
+    Route::post('/summarize', [Controller::class, 'summarizeTextFromFile'])->name('summarize');
+
 });
 
 Route::middleware(['isTeacher'])->group(function () {
